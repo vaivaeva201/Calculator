@@ -98,7 +98,7 @@ document.querySelectorAll(".functions").forEach(button => {
 
                 if (typeof val !== "number" || !Number.isFinite(val)) 
                 {
-                    throw new Error("Klaida: netinkamas skaičius.");
+                    throw new Error("Klaida: netinkamas skaičius");
                 }
 
                 display.value = String(val * val);
@@ -117,7 +117,7 @@ document.querySelectorAll(".functions").forEach(button => {
 
                 if (val < 0) 
                 {
-                    throw new Error("Klaida: neigiamo skaičiaus kvadratinė šaknis negalima.");
+                    throw new Error("Klaida: neigiamo skaičiaus kvadratinė šaknis negalima");
                 }
 
                 display.value = String(Math.sqrt(val));
@@ -144,7 +144,7 @@ document.querySelectorAll(".functions").forEach(button => {
             let val = Number(display.value);
             if (!Number.isInteger(val) || val < 0)
             {
-                error.value = "Klaida: faktorialas galimas tik neneigiamiems sveikiesiems skaičiams.";
+                error.value = "Klaida: faktorialas galimas tik neneigiamiems sveikiesiems skaičiams";
             }
             else
             {
@@ -305,17 +305,101 @@ function calculate(expression) {
     {
         throw new Error("Klaida: rezultatas nėra baigtinis.");
     }
-                //!!!!!!!!
     return Math.round((result + Number.EPSILON) * 1e10) / 1e10;
 }
 
 document.querySelector(".equal-btn").addEventListener("click", () => {
-    try {
+    try
+    {
         let rez = calculate(display.value);
 
         display.value = String(rez);
         error.value = "";
-    } catch (err) {
+    } 
+    catch (err) 
+    {
         error.value = err.message;
     }
+});
+
+
+document.addEventListener("keydown", (event) => {
+    const key = event.key;
+
+    if (key >= "0" && key <= "9") 
+    {
+        appendToDisplay(key);
+    }
+    else if (key === "." || key === ",") 
+    {
+        let part = display.value.split(/[+\-×÷^r]/);
+        let current = part[part.length - 1];
+
+        if (!current.includes(".")) 
+        {
+            appendToDisplay(".");
+        }
+    }
+    else if (key === "+") 
+    {
+        appendOperator("+");
+    }
+    else if (key === "-") 
+    {
+        appendOperator("-");
+    }
+    else if (key === "*") 
+    {
+        appendOperator("×");
+    }
+    else if (key === "/") 
+    {
+        event.preventDefault();
+        appendOperator("÷");
+    }
+    else if (key === "^") 
+    {
+        appendOperator("^");
+    }
+    else if (key === "(" || key === ")") 
+    {
+        error.value = "";
+
+        if (display.value === "0")
+        {
+            display.value = key;
+        } 
+        else 
+        {
+            display.value += key;
+        }
+    }
+
+    else if (key === "Enter" || key === "=") 
+    {
+        event.preventDefault();
+
+        try 
+        {
+            let rez = calculate(display.value);
+            display.value = String(rez);
+            error.value = "";
+        } 
+        catch (err)
+        {
+            error.value = err.message;
+        }
+    }
+
+    else if (key === "Backspace") 
+    {
+        event.preventDefault();
+        clear();
+    }
+
+    else if (key === "Escape") 
+    {
+        clearAll();
+    }
+
 });
