@@ -1,6 +1,10 @@
 let display = document.getElementById("display");
 let error = document.getElementById("error");
 
+function scrollDisplayToEnd() {
+    display.scrollLeft = display.scrollWidth;
+}
+
 function appendToDisplay(value) {
     error.value = "";
 
@@ -16,13 +20,13 @@ function appendToDisplay(value) {
     {
         display.value += value;
     }
+
+    scrollDisplayToEnd();
 }
 
 function appendOperator(operator) {
     error.value = "";
-
-    if(display.value == "0")
-        return;
+    
     if (/[+\-×÷^r]$/.test(display.value)) 
     {
         display.value = display.value.slice(0, -1) + operator;

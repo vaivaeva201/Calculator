@@ -53,6 +53,10 @@ body {
     margin: 0;
     background-color: #2F153B;
     font-size: clamp(1.2rem, 4vh, 2.5rem);
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: auto;
+    direction: ltr;
 }
 
 .error_screen {
