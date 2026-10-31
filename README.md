@@ -36,5 +36,5 @@ Or locally by opening `index.html` in a web browser.
 
 ## Preview
 
-![Calculator on computer](images/mac_screen.png)
-![Calculator on phone](images/phone_screen.jpg)
+<img src="images/mac_screen.png" alt="Calculator on computer" width="500">
+<img src="images/phone_screen.jpg" alt="Calculator on phone" width="250">
