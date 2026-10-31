@@ -193,16 +193,16 @@ button:active {
     }
 
     button {
-        font-size: clamp(1rem, 2.5vh, 2rem);
+        font-size: clamp(1.2rem, 1.8vw, 2.2rem);
     }
 
     .functions,
     .pag_funk {
-        font-size: clamp(0.8rem, 1.8vh, 1.25rem);
+        font-size: clamp(1rem, 1.4vw, 1.6rem);
     }
 
     .skaicius {
-        font-size: clamp(1rem, 2.5vh, 2rem);
+        font-size: clamp(1.4rem, 2vw, 2.2rem);
     }
 }
 

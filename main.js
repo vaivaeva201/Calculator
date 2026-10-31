@@ -100,14 +100,13 @@ document.querySelectorAll(".functions").forEach(button => {
             {
                 let val = calculate(display.value);
 
-                if (typeof val !== "number" || !Number.isFinite(val)) 
+                if (!Number.isFinite(val)) 
                 {
-                    throw new Error("Klaida: netinkamas skaičius");
+                    throw new Error("Klaida: rezultatas viršija leistinas ribas");
                 }
-
                 display.value = String(val * val);
                 error.value = "";
-            } 
+            }
             catch (err) 
             {
                 error.value = err.message;
@@ -153,8 +152,19 @@ document.querySelectorAll(".functions").forEach(button => {
             else
             {
                 let fact = 1;
-                for (let i = 1; i <= val; i++) fact *= i;
-                display.value = fact;
+                for (let i = 1; i <= val; i++) 
+                {
+                    fact *= i;
+                }
+
+                if (!Number.isFinite(fact)) 
+                {
+                    error.value = "Klaida: rezultatas viršija leistinas ribas";
+                }
+                else 
+                {
+                    display.value = fact;
+                }
             }
         } 
         else if (text === "xⁿ") 
@@ -307,7 +317,7 @@ function calculate(expression) {
 
     if (!Number.isFinite(result)) 
     {
-        throw new Error("Klaida: rezultatas nėra baigtinis.");
+        throw new Error("Klaida: rezultatas viršija leistinas ribas");
     }
     return Math.round((result + Number.EPSILON) * 1e10) / 1e10;
 }
